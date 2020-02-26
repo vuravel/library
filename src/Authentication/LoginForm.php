@@ -1,4 +1,5 @@
 <?php
+
 namespace Vuravel\Library\Authentication;
 
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
