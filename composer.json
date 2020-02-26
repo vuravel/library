@@ -1,0 +1,36 @@
+{
+    "name": "vuravel/library",
+    "description": "Vuravel prebuilt classes for fast development - Laravel Vue.js",
+    "keywords": [
+        "vuravel",
+        "laravel",
+        "vue.js",
+        "classes",
+        "library"
+    ],
+    "license": "MIT",
+    "require": {
+    	"php": ">=7.1.0",
+        "vuravel/form": "dev-master",
+        "vuravel/catalog": "dev-master",
+        "vuravel/menu": "dev-master"
+    },
+    "autoload": {
+        "psr-4": {
+            "Vuravel\\Library\\": "src/",
+            "Vuravel\\Library\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Vuravel\\Library\\VuravelLibraryServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
