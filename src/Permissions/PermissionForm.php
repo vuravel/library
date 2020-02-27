@@ -2,7 +2,7 @@
 
 namespace Vuravel\Library\Permissions;
 
-use App\Permission;
+use Vuravel\Library\Permissions\Permission;
 use Vuravel\Components\{Title, Input, Button};
 
 class PermissionForm extends \VlForm
@@ -13,7 +13,7 @@ class PermissionForm extends \VlForm
     public function components()
     {
         return [
-            Title::form('Edit permission'),
+            Title::form(($this->creating() ? 'Add a' : 'Edit').' permission'),
             Input::form('Name'),
             Input::form('Guard')->name('guard_name')->default('web'),
             Button::form('Save')->submitsForm()

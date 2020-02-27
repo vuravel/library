@@ -11,6 +11,11 @@ class UsersRolesPermissionsCatalog extends \VlCatalog
     public $layout = 'Table';
     public $card = TableRow::class;
 
+    public function query()
+    {
+        return User::with('roles.permissions');
+    }
+
     public function columns()
     {
         return [
@@ -19,11 +24,6 @@ class UsersRolesPermissionsCatalog extends \VlCatalog
             Th::form('Roles'),
             Th::form('Permissions')
         ];
-    }
-
-    public function query()
-    {
-        return User::with('roles', 'roles.permissions');
     }
 
     public function card($item)

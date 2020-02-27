@@ -2,8 +2,9 @@
 
 namespace Vuravel\Library\Permissions;
 
-use Spatie\Permission\Models\Role;
+use Vuravel\Library\Permissions\Role;
 use Vuravel\Catalog\Cards\TableRow;
+use Vuravel\Components\{EditLink, Html, DeleteLink, FlexBetween, Title, AddLink};
 
 class RolesCatalog extends \VlCatalog
 {
@@ -19,20 +20,21 @@ class RolesCatalog extends \VlCatalog
     public function card($item)
     {
         return [
-            VlEditLink($item->name)->post('vuravel.role.update', ['id' => $item->id]),
-            VlHtml($item->guard_name),
-            VlHtml($item->permissions->implode('name', ', ')),
-            VlDeleteLink($item)
+            EditLink::form($item->name)
+                ->post('library.permissions.role', ['id' => $item->id]),
+            Html::form($item->guard_name),
+            Html::form($item->permissions->implode('name', ', ')),
+            DeleteLink::form($item)
         ];
     }
 
     public function top()
     {
         return [
-            VlFlexBetween(
-                VlTitle('The application\'s roles'),
-                VlAddLink('Add a new role')->icon('icon-plus')
-                    ->post('vuravel.role.update')
+            FlexBetween::form(
+                Title::form('The application\'s roles'),
+                AddLink::form('Add a new role')->icon('icon-plus')
+                    ->post('library.permissions.role')
             )
         ];
     }

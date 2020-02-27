@@ -2,7 +2,8 @@
 
 namespace Vuravel\Library\Permissions;
 
-use Spatie\Permission\Models\Role;
+use Vuravel\Library\Permissions\Role;
+use Vuravel\Components\{Title, Input, MultiSelect, Button};
 
 class RoleForm extends \VlForm
 {
@@ -12,12 +13,11 @@ class RoleForm extends \VlForm
     public function components()
     {
         return [
-            VlTitle('Edit role'),
-            VlInput('Name'),
-            VlInput('Guard')->name('guard_name')->default('web'),
-            VlMultiSelect('Permissions')->optionsFrom('id', 'name'),
-            VlButton('Save')->submitsForm()
+            Title::form(($this->creating() ? 'Add a' : 'Edit').' role'),
+            Input::form('Name'),
+            Input::form('Guard')->name('guard_name')->default('web'),
+            MultiSelect::form('Permissions')->optionsFrom('id', 'name'),
+            Button::form('Save')->submitsForm()
         ];
     }
-
 }

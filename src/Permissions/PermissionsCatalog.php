@@ -2,8 +2,9 @@
 
 namespace Vuravel\Library\Permissions;
 
-use App\Permission;
+use Vuravel\Library\Permissions\Permission;
 use Vuravel\Catalog\Cards\TableRow;
+use Vuravel\Components\{EditLink, Html, DeleteLink, FlexBetween, Title, AddLink};
 
 class PermissionsCatalog extends \VlCatalog
 {
@@ -13,26 +14,26 @@ class PermissionsCatalog extends \VlCatalog
 
     public function query()
     {
-        return new Permission();
+        return new Permission(); //querying all permissions
     }
 
     public function card($item)
     {
         return [
-            VlEditLink($item->name)
-                ->post('vuravel.permission.update', ['id' => $item->id]),
-            VlHtml($item->guard_name),
-            VlDeleteLink($item)
+            EditLink::form($item->name)
+                ->post('library.permissions.permission', ['id' => $item->id]),
+            Html::form($item->guard_name),
+            DeleteLink::form($item)
         ];
     }
 
     public function top()
     {
         return [
-            VlFlexBetween(
-                VlTitle('The application\'s permissions'),
-                VlAddLink('Add a new permission')->icon('icon-plus')
-                    ->post('vuravel.permission.update')
+            FlexBetween::form(
+                Title::form('The application\'s permissions'),
+                AddLink::form('Add a new permission')->icon('icon-plus')
+                    ->post('library.permissions.permission')
             )
         ];
     }
