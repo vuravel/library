@@ -4,7 +4,7 @@ namespace Vuravel\Library\Authentication;
 
 use Vuravel\Components\Link;
 
-class VlLogoutForm extends \VlForm
+class LogoutForm extends \VlForm
 {
     protected $redirectTo = '/';
 

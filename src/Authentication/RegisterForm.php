@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Auth\Events\Registered;
 use Vuravel\Components\{Input, Password, Columns, Button, Link};
 
-class VlRegisterForm extends \VlForm
+class RegisterForm extends \VlForm
 {
     public $class = 'p-4 mx-auto';
     public $style = 'max-width:350px';
