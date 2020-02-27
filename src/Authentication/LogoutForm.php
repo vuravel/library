@@ -24,4 +24,9 @@ class LogoutForm extends \VlForm
         ];
     }
 
+    public function authorize()
+    {
+        return \Auth::check();
+    }
+
 }

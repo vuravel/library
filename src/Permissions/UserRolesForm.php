@@ -2,20 +2,19 @@
 
 namespace Vuravel\Library\Permissions;
 
-use App\Permission;
-use Vuravel\Components\{Title, Input, Button};
+use App\User;
+use Vuravel\Components\{Title, Input, MultiSelect, Button};
 
-class PermissionForm extends \VlForm
+class UserRolesForm extends \VlForm
 {
-    public static $model = Permission::class;
+    public static $model = User::class;
     public $class = 'p-4';
 
     public function components()
     {
         return [
-            Title::form('Edit permission'),
-            Input::form('Name'),
-            Input::form('Guard')->name('guard_name')->default('web'),
+            Title::form($this->record()->name.'\'s roles'),
+            MultiSelect::form('Roles')->optionsFrom('id', 'name'),
             Button::form('Save')->submitsForm()
         ];
     }
@@ -28,8 +27,7 @@ class PermissionForm extends \VlForm
     public function rules()
     {
         return [
-            'name' => 'required',
-            'guard_name' => 'required'
+            'name' => 'required'
         ];
     }
 

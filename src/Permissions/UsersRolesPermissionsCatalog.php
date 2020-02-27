@@ -4,25 +4,36 @@ namespace Vuravel\Library\Permissions;
 
 use App\User;
 use Vuravel\Catalog\Cards\TableRow;
+use Vuravel\Components\{Th, Html, EditLink};
 
 class UsersRolesPermissionsCatalog extends \VlCatalog
 {
     public $layout = 'Table';
     public $card = TableRow::class;
-    public $columns = ['id', 'Name', 'Roles', 'Permissions'];
+
+    public function columns()
+    {
+        return [
+            Th::form('Id')->sortsCatalog('id'),
+            Th::form('Name')->sortsCatalog('name'),
+            Th::form('Roles'),
+            Th::form('Permissions')
+        ];
+    }
 
     public function query()
     {
-        return User::with('roles', 'permissions');
+        return User::with('roles', 'roles.permissions');
     }
 
     public function card($item)
     {
         return [
-            VlHtml($item->id),
-            VlHtml($item->name),
-            VlEditLink($item->getRoleNames()->implode(', ')),
-            VlHtml($item->getPermissionNames()->implode(', '))
+            Html::form($item->id),
+            EditLink::form($item->name)->class('font-bold')
+                ->post('library.permissions.user-roles', ['id' => $item->id]),
+            Html::form($item->roles->implode('name', ', ')),
+            Html::form($item->roles->flatMap->permissions->implode('name', ', '))
         ];
     }
 

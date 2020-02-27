@@ -9,7 +9,9 @@ class ResetPasswordForm extends \VlForm
 {
     use ResetsPasswords;
 
-    protected $redirectTo = 'home';
+    public $class = 'p-4 mx-auto';
+    public $style = 'max-width:350px';
+    protected $redirectTo = '/';
 
     public function handle($request)
     {

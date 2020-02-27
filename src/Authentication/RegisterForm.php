@@ -4,7 +4,7 @@ namespace Vuravel\Library\Authentication;
 
 use App\User;
 use Illuminate\Auth\Events\Registered;
-use Vuravel\Components\{Input, Password, Columns, Button, Link};
+use Vuravel\Components\{Input, Password, FlexBetween, Button, Link};
 
 class RegisterForm extends \VlForm
 {
@@ -12,6 +12,12 @@ class RegisterForm extends \VlForm
     public $style = 'max-width:350px';
     protected $redirectTo = 'verification.notice';
     public static $model = User::class;
+
+    public function completed($model)
+    {
+        event(new Registered($model));
+        \Auth::guard()->login($model);
+    }
 
     public function components()
     {
@@ -21,7 +27,7 @@ class RegisterForm extends \VlForm
             //Input::form('Name')->name('name')->sluggable('username'),
             Input::form('Email')->name('email'),
             Password::form('Password')->name('password'),
-            Columns::form(
+            FlexBetween::form(
                 Button::form('Register')->submitsForm(),			 
                 Link::form('Already have an account?')
                     ->href('login')

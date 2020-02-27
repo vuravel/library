@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 class ForgotPasswordForm extends \VlForm
 {
     use SendsPasswordResetEmails;
+    
+    public $class = 'p-4 mx-auto';
+    public $style = 'max-width:350px';
 
     public function handle($request)
     {
@@ -19,6 +22,18 @@ class ForgotPasswordForm extends \VlForm
         return [
             Input::form('Email')->name('email'),
             Button::form('Send password reset instructions')->submitsForm()
+        ];
+    }
+
+    public function authorize()
+    {
+        return \Auth::guest();
+    }
+
+    public function rules()
+    {
+        return [
+            'email' => 'required|email'
         ];
     }
 
