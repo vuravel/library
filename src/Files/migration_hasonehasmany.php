@@ -12,7 +12,7 @@ class CreateFilesTable extends Migration
     public function up()
     {
         Schema::create('files', function (Blueprint $table) {
-         $table->increments('id');
+         $table->bigIncrements('id');
          $table->unsignedInteger('post_id')->index();
          $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
          $table->string('path');
