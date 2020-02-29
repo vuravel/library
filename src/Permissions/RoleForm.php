@@ -20,4 +20,19 @@ class RoleForm extends \VlForm
             Button::form('Save')->submitsForm()
         ];
     }
+
+    public function authorize()
+    {
+        return auth()->user() && auth()->user()->hasRole('admin|super-admin');
+    }
+
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'guard_name' => 'required',
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id'
+        ];
+    }
 }

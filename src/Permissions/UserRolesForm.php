@@ -27,7 +27,8 @@ class UserRolesForm extends \VlForm
     public function rules()
     {
         return [
-            'name' => 'required'
+            'roles' => 'array',
+            'roles' => 'exists:roles,id'
         ];
     }
 

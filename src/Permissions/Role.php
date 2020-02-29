@@ -6,8 +6,8 @@ use Spatie\Permission\Models\Role as SpatieRole;
 
 class Role extends SpatieRole
 {
-	//Since we are using the DeleteLink component in the Catalog,
-	//we extend Spatie's Role model to set the deletable authorization logic.
+    //Since we are using the DeleteLink component in the Catalog,
+    //we extend Spatie's Role model to set the deletable authorization logic.
     public function deletable()
     {
         return auth()->user() && auth()->user()->hasRole('admin|super-admin');
