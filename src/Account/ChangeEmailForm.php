@@ -22,7 +22,7 @@ class ChangeEmailForm extends \VlForm
     {
         return [
             Input::form('Email')->name('email')
-                ->default(optional(auth()->user())->email)
+                ->default(auth()->user()->email)
                 ->comment('You will be asked to reverify your email after you change it.'),
             Button::form('Change email')->submitsForm()
         ];

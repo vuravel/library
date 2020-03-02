@@ -4,6 +4,7 @@ namespace Vuravel\Library\Account;
 
 use Vuravel\Components\{Password, Button};
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Illuminate\Validation\ValidationException;
 
 class ChangePasswordForm extends \VlForm
 {
@@ -11,11 +12,10 @@ class ChangePasswordForm extends \VlForm
 
     public function handle($request)
     {
-        if (! \Hash::check($request->old_password, \Auth::user()->password)) {
-            return response422([
+        if (! \Hash::check($request->old_password, \Auth::user()->password))
+            throw ValidationException::withMessages([
                 'old_password' => __('Sorry. The old password you entered does not match our records.')
             ]);
-        }
         
         $this->resetPassword(\Auth::user(), $request->password);
         
