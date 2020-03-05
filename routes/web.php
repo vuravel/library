@@ -7,7 +7,7 @@ Route::middleware('web')->group(function(){
 
 	Route::middleware('guest')->group(function(){
 
-		Route::group(['extends' =>'vuravel-menu::app'], function(){
+		Route::group(['extends' =>'vuravel::app'], function(){
 
 			//Route::vuravel('login', AuthLoginForm::class)->name('login');
 

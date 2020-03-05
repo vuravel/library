@@ -1,3 +1,3 @@
-@extends('vuravel-menu::app',[
+@extends('vuravel::app',[
     'LeftSidebar' => new App\Menus\AccountSettingsSidebar()
 ])
